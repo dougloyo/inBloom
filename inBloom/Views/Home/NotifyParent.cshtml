@@ -4,7 +4,7 @@
 }
 
 <h2><i class="icon-envelope"></i> Notify Parent</h2>
-<br/>
+<div class="separator-line"></div>
 @using (Html.BeginForm("NotifyParent", "Home", FormMethod.Post, new {id = "form"}))
 {
     @Html.HiddenFor(x => x.StudentId);
@@ -71,12 +71,28 @@
     </p>
     <p>
         <label for="Message">Message:</label>
-        @Html.TextAreaFor(x => x.Message)
+        @Html.TextAreaFor(x => x.Message, new { rows="6" })
     </p>
     <p>
         <input id="Submit" type="submit" value="Send Message" />
     </p>
 }
+
+<h3>Historical Interactions</h3>
+<div class="messages">
+    <ul>
+        <li>
+            <div class="interaction-date">12-12-2009 <i class="icon-calendar"></i></div>
+            <div class="interaction-message">
+                <p><h4>Positive feedback.</h4></p>
+                <p><span style="font-weight:bold;">Subject:</span> Some subject</p>
+                <p><span style="font-weight:bold;">Message:</span> Some long long message that we left on the student.</p>
+                
+            </div>
+            <div class="interaction-divider">.............................................................................................................................................................................................................</div>
+        </li>
+    </ul>
+</div>
 
 <script type="text/javascript">
     $(document).ready(        

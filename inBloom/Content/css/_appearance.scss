@@ -14,16 +14,28 @@ body
 	color: $font-color-primary;
 }
 
+.separator-line{
+	width: 100%;
+	height: 5px;
+	background-color: #ededed;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 a{
 	font-size: 14px;
 	color: $font-color-secondary;
 	text-decoration: none;
 }
 
+label{
+	font-weight: bold;
+}
 
 input, textarea, select{
-	border: 1px solid $font-color-primary;
-	width: 100%;
+	border: 1px solid #cacaca;
+	width: 90%;
+	font-size: 17px;
 }
 
 input[type=radio]{
@@ -137,4 +149,34 @@ background-position: 0px 287px;
 
 .student-4 {
 background-position: 0px 382px;
+}
+
+
+.messages{
+	overflow:auto; 
+	width:90%; 
+	height:290px; 
+	border-radius:5px; 
+	border:1px solid grey; 
+	padding:20px;
+
+	ul{
+		list-style-type: none;
+	}
+}
+
+.interaction-date{
+	float: left;
+	height: 20px;
+	background-color: $background-tertiary;
+	color: $font-color-tertiary;
+}
+
+.interaction-message{
+	float: left;
+	margin-left:10px;
+}
+
+.interaction-divider{
+	clear: both;
 }
