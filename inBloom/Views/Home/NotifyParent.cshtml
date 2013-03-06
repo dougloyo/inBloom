@@ -5,10 +5,20 @@
 
 <h2><i class="icon-envelope"></i> Notify Parent</h2>
 <br/>
-@using (Html.BeginForm("NotifyParent", "Home", FormMethod.Post, new {id = "searchForm"}))
+@using (Html.BeginForm("NotifyParent", "Home", FormMethod.Post, new {id = "form"}))
 {
+    @Html.HiddenFor(x => x.StudentId);
+    <div class="radios">
+        <h4>Feedback is:</h4>
+        @Html.RadioButtonFor(x=>x.FeedbackPositive, "True", new { id = "feedback_positive"}) 
+        <label for="feedback_positive">Positive</label>
+        
+        @Html.RadioButtonFor(x=>x.FeedbackPositive, "False", new { id = "feedback_negative"})
+        <label for="feedback_negative">Negative</label>
+    </div>
+    <br/><br/>
     <p>
-        <label>Type of notification</label>
+        <label for="Type">Type of notification: </label>
         @Html.DropDownListFor(x => x.Type, new List<SelectListItem>
             {
                 new SelectListItem
@@ -20,26 +30,31 @@
                     {
                         Selected = false,
                         Text = "Homework not turned in",
+                        Value = "{studentName} did not turn in homework."
                     },
                 new SelectListItem
                     {
                         Selected = false,
                         Text = "Homework incomplete",
+                        Value = "{studentName}'s homework was incomplete."
                     },
                 new SelectListItem
                     {
                         Selected = false,
                         Text = "Absent",
+                        Value = "{studentName} was absent today."
                     },
                 new SelectListItem
                     {
                         Selected = false,
                         Text = "Tardy",
+                        Value = "{studentName} was tardy today."
                     },
                 new SelectListItem
                     {
                         Selected = false,
                         Text = "Disruptive",
+                        Value = "{studentName} was disruptive in class."
                     },
                 new SelectListItem
                     {
@@ -51,14 +66,39 @@
             })
     </p>
     <p>
-        <label>Title:</label>
-        @Html.TextBoxFor(x => x.Title)
+        <label for="Subject">Subject:</label>
+        @Html.TextBoxFor(x => x.Subject)
     </p>
     <p>
-        <label>Message:</label><br/>
+        <label for="Message">Message:</label>
         @Html.TextAreaFor(x => x.Message)
     </p>
     <p>
         <input id="Submit" type="submit" value="Send Message" />
     </p>
 }
+
+<script type="text/javascript">
+    $(document).ready(        
+        $('#Type').change(
+            function () {
+                var value = $('#Type').val();
+                prepareSubject(value);
+            }
+        )
+    );
+           
+    
+    function prepareSubject(value) {
+        
+        $('#Subject').val(value.replace("{studentName}", querystring("studentName")));
+
+    }
+    
+    function querystring(key) {
+        var re=new RegExp('(?:\\?|&)'+key+'=(.*?)(?=&|$)','gi');
+        var r=[], m;
+        while ((m=re.exec(document.location.search)) != null) r.push(m[1]);
+        return r;
+    }
+</script>

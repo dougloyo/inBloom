@@ -16,6 +16,11 @@ body
 
 input, textarea, select{
 	border: 1px solid $font-color-primary;
+	width: 100%;
+}
+
+input[type=radio]{
+	width: 20px;
 }
 
 .l-sidebar{

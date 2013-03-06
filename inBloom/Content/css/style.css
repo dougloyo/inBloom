@@ -24,6 +24,20 @@ div.container {
   height: 760px;
   padding: 20px; }
 
+#form p {
+  margin-bottom: 10px; }
+#form label {
+  display: block;
+  width: 200px; }
+#form input[type=submit] {
+  width: 100px;
+  height: 30px; }
+#form .radios label {
+  float: left;
+  width: 70px; }
+#form .radios input {
+  float: left; }
+
 body {
   font-family: Raleway, sans-serif; }
 
@@ -38,7 +52,11 @@ body {
   color: #575655; }
 
 input, textarea, select {
-  border: 1px solid #575655; }
+  border: 1px solid #575655;
+  width: 100%; }
+
+input[type=radio] {
+  width: 20px; }
 
 .l-sidebar {
   background-color: #0c0d0c;

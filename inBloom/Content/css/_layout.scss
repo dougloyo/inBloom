@@ -43,3 +43,31 @@ div.container{
 
 .l-menu{
 }
+
+
+
+#form{
+	p{
+		margin-bottom: 10px;	
+	}
+
+	label{
+		display: block;
+		width:200px;
+	}
+
+	input[type=submit]{
+		width:100px;
+		height:30px;
+	}
+
+	.radios{
+		
+		label{
+			float:left;
+			width: 70px;
+		}
+
+		input{ float:left;	}
+	}
+}

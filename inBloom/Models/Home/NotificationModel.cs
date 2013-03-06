@@ -7,8 +7,11 @@ namespace inBloom.Models.Home
 {
     public class NotificationModel
     {
-        public string Title { get; set; }
+        public string StudentId { get; set; }
+        public string Subject { get; set; }
+        public bool FeedbackPositive { get; set; }
         public string Type { get; set; }
         public string Message { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace inBloom.Controllers
             var x = (from d in data
                     select new StudentListModel.Student
                         {
+                            Id = d.Value<string>("id"),
                             FirstName = d.Value<JToken>("name").Value<string>("firstName"),
                             LastName = d.Value<JToken>("name").Value<string>("lastSurname")
                         }).ToList();
@@ -52,9 +53,21 @@ namespace inBloom.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult NotifyParent()
         {
             var model = new NotificationModel();
+
+            model.StudentId = Request.QueryString["StudentId"];
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult NotifyParent(NotificationModel model)
+        {
+            model.DateTime = DateTime.Now;
+            
             return View(model);
         }
 
