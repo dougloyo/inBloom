@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 using inBloom.Models.Home;
 using inBloomApiLibrary;
 
@@ -14,6 +15,28 @@ namespace inBloom.Controllers
     {
         private readonly GetSectionsData _sectionService = new GetSectionsData();
         private readonly GetStudentsData _studentService = new GetStudentsData();
+
+        private RestClient _restClient;
+
+        private RestClient RestClient
+        {
+            get
+            {
+                if (_restClient == null)
+                {
+                    string bearerToken = string.Format("bearer {0}", AccessToken);
+
+                    string baseUrl = "https://api.sandbox.inbloom.org/api/rest/v1.1";
+
+                    _restClient = new RestClient(baseUrl);
+                    _restClient.AddDefaultHeader("Content-Type", "application/vnd.slc+json");
+                    _restClient.AddDefaultHeader("Accept", "application/vnd.slc+json");
+                    _restClient.AddDefaultHeader("Authorization", bearerToken);
+                }
+
+                return _restClient;
+            }
+        }
 
         private string AccessToken
         {
