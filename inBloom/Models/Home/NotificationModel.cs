@@ -5,6 +5,7 @@ using System.Web;
 
 namespace inBloom.Models.Home
 {
+    [Serializable]
     public class NotificationModel
     {
         public string StudentId { get; set; }

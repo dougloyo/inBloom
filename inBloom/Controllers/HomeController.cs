@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Serializers;
 using inBloom.Models.Home;
 using inBloomApiLibrary;
 
@@ -15,6 +16,7 @@ namespace inBloom.Controllers
     {
         private readonly GetSectionsData _sectionService = new GetSectionsData();
         private readonly GetStudentsData _studentService = new GetStudentsData();
+        private readonly  StudentService _studentCustomService = new StudentService();
 
         private RestClient _restClient;
 
@@ -32,6 +34,7 @@ namespace inBloom.Controllers
                     _restClient.AddDefaultHeader("Content-Type", "application/vnd.slc+json");
                     _restClient.AddDefaultHeader("Accept", "application/vnd.slc+json");
                     _restClient.AddDefaultHeader("Authorization", bearerToken);
+                    
                 }
 
                 return _restClient;
@@ -90,8 +93,32 @@ namespace inBloom.Controllers
         public ActionResult NotifyParent(NotificationModel model)
         {
             model.DateTime = DateTime.Now;
+            model.Type = "";
+
+            var customData = new CustomStudnetData();
+            customData.Notifications.Add(model);
+
+            
+            
+            var result = _studentCustomService.SaveCustomData(RestClient, model.StudentId, customData);
+
+            var response = _studentCustomService.GetCustomData<CustomStudnetData>(RestClient, model.StudentId);
+            var x = JsonConvert.DeserializeObject<CustomStudnetData>(response.Content);
+
+            //var returnedModel = _studentCustomService.GetCustomData(AccessToken,model.StudentId);
+
             
             return View(model);
+        }
+
+        public class CustomStudnetData
+        {
+            public CustomStudnetData()
+            {
+                Notifications = new List<NotificationModel>();
+            }
+
+            public List<NotificationModel> Notifications { get; set; }
         }
 
         [HttpGet]

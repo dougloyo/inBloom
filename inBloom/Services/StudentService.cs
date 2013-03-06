@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Serializers;
 using inBloomApiLibrary;
 
 namespace inBloom
@@ -15,6 +16,7 @@ namespace inBloom
         public IRestResponse SaveCustomData(RestClient client, string studentId, object data)
         {
             RestRequest request = new RestRequest(string.Format("/students/{0}/custom", studentId), Method.POST);
+            //request.JsonSerializer = new JsonNetSerializer();
             request.RequestFormat = DataFormat.Json;
             request.AddBody(data);
             var studentCustomResponse = client.Post(request);
@@ -26,6 +28,7 @@ namespace inBloom
             where T : new() 
         {
             var request = new RestRequest(string.Format("/students/{0}/custom", studentId), Method.GET);
+            //request.JsonSerializer = new JsonNetSerializer();
             request.RequestFormat = DataFormat.Json;
 
             return client.Execute<T>(request);

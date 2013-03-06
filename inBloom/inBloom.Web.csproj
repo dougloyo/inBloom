@@ -113,6 +113,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\JsonNetSerializer.cs" />
     <Compile Include="Models\Home\NotificationModel.cs" />
     <Compile Include="Models\Home\ScheduleParentTeacherConferenceModel.cs" />
     <Compile Include="Models\Home\StudentListModel.cs" />
@@ -148,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
