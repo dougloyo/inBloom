@@ -15,4 +15,10 @@ namespace inBloom.Models.Home
         public string Message { get; set; }
         public DateTime DateTime { get; set; }
     }
+
+    public class NotificationViewModel : NotificationModel
+    {
+        public string StudentId { get; set; }
+        public List<NotificationModel> Notifications { get; set; } 
+    }
 }

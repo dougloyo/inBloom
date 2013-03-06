@@ -5,10 +5,14 @@
 
 <h2><i class="icon-list-alt"></i> Student list for selected section</h2>
 <br/>
+@if (TempData.ContainsKey("message"))
+{
+    <div>@TempData["message"]</div>
+}
 <p>
     Section:
     <select>
-        <option>6th Grade</option>
+        <option>Sec 145</option>
     </select>
 </p>
 <br/>

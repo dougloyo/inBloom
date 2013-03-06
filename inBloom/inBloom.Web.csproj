@@ -181,7 +181,7 @@
     <Content Include="Content\font\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\inbloom-dotnet\inBloomApiLibrary\inBloomApiLibrary.csproj">
+    <ProjectReference Include="..\..\Libraries\inbloom-dotnet\inBloomApiLibrary\inBloomApiLibrary.csproj">
       <Project>{5f6db91f-8206-488f-8ec8-5383343622ac}</Project>
       <Name>inBloomApiLibrary</Name>
     </ProjectReference>

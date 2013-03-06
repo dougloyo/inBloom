@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -61,28 +62,35 @@ namespace inBloom.Controllers
         {
             //var data = GetSections();
 
-            var data = _studentService.GetStudents(AccessToken);
+            var model = GetStudentListModel();
 
-            var x = (from d in data
-                    select new StudentListModel.Student
-                        {
-                            Id = d.Value<string>("id"),
-                            FirstName = d.Value<JToken>("name").Value<string>("firstName"),
-                            LastName = d.Value<JToken>("name").Value<string>("lastSurname")
-                        }).ToList();
+            return View(model);
+        }
+
+        private StudentListModel GetStudentListModel()
+        {
+            var studentsData = _studentService.GetStudents(AccessToken);
+
+            var students =
+                (from d in studentsData
+                 select new StudentListModel.Student
+                     {
+                         Id = d.Value<string>("id"),
+                         FirstName = d.Value<JToken>("name").Value<string>("firstName"),
+                         LastName = d.Value<JToken>("name").Value<string>("lastSurname")
+                     }).ToList();
 
             var model = new StudentListModel
                 {
-                    List = x
+                    List = students
                 };
-            
-            return View(model);
+            return model;
         }
 
         [HttpGet]
         public ActionResult NotifyParent()
         {
-            var model = new NotificationModel();
+            var model = new NotificationViewModel();
 
             model.StudentId = Request.QueryString["StudentId"];
 
@@ -93,27 +101,29 @@ namespace inBloom.Controllers
         public ActionResult NotifyParent(NotificationModel model)
         {
             model.DateTime = DateTime.Now;
-            model.Type = "";
 
-            var customData = new CustomStudnetData();
-            customData.Notifications.Add(model);
+            CustomStudentData customData;
 
+            var getResponse = _studentCustomService.GetCustomData<CustomStudentData>(RestClient, model.StudentId);
             
+            if (getResponse.StatusCode == HttpStatusCode.NotFound)
+                customData = new CustomStudentData();
+            else            
+                customData = JsonConvert.DeserializeObject<CustomStudentData>(getResponse.Content);
+
+            // Add the notification to the top of the list
+            customData.Notifications.Insert(0, model);
             
-            var result = _studentCustomService.SaveCustomData(RestClient, model.StudentId, customData);
+            // Save the notification
+            var saveResponse = _studentCustomService.SaveCustomData(RestClient, model.StudentId, customData);
 
-            var response = _studentCustomService.GetCustomData<CustomStudnetData>(RestClient, model.StudentId);
-            var x = JsonConvert.DeserializeObject<CustomStudnetData>(response.Content);
-
-            //var returnedModel = _studentCustomService.GetCustomData(AccessToken,model.StudentId);
-
-            
-            return View(model);
+            TempData["message"] = "Notification sent.";
+            return RedirectToAction("Index");
         }
 
-        public class CustomStudnetData
+        public class CustomStudentData
         {
-            public CustomStudnetData()
+            public CustomStudentData()
             {
                 Notifications = new List<NotificationModel>();
             }
