@@ -7,7 +7,7 @@
 <div class="separator-line"></div>
 @if (TempData.ContainsKey("message"))
 {
-    <div>@TempData["message"]</div>
+    <div class="message">@TempData["message"]</div>
 }
 <p>
     Section:
@@ -37,7 +37,7 @@
             <td><i class="student-@(i%4)"></i></td>
             <td>@s.FirstName</td>
             <td>@s.LastName</td>
-            <td><a href="@Url.Action("NotifyParent", new { studentName = s.FirstName, studentId = s.Id})">Notify Parent</a> | <a href=""></a></td>
+            <td><a href="@Url.Action("NotifyParent", new { studentName = s.FirstName, studentId = s.Id})">Notify Parent</a></td>
         </tr>
         i++;
     }
