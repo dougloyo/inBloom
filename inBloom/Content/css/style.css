@@ -51,6 +51,11 @@ body {
   background-color: #ebf3ef;
   color: #575655; }
 
+a {
+  font-size: 14px;
+  color: #77c69f;
+  text-decoration: none; }
+
 input, textarea, select {
   border: 1px solid #575655;
   width: 100%; }

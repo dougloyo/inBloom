@@ -14,6 +14,13 @@ body
 	color: $font-color-primary;
 }
 
+a{
+	font-size: 14px;
+	color: $font-color-secondary;
+	text-decoration: none;
+}
+
+
 input, textarea, select{
 	border: 1px solid $font-color-primary;
 	width: 100%;
