@@ -2,21 +2,21 @@
 @{
     ViewBag.Title = "NotifyParent";
 }
+@functions
+{
 
+    public string translateFeedback(bool feedback)
+    {
+        return feedback ? "Positive" : "Negative";
+    }
+
+}
 <h2><i class="icon-envelope"></i> Notify Parent</h2>
 <div class="separator-line"></div>
 @using (Html.BeginForm("NotifyParent", "Home", FormMethod.Post, new {id = "form"}))
 {
     @Html.HiddenFor(x => x.StudentId);
-    <div class="radios">
-        <h4>Feedback is:</h4>
-        @Html.RadioButtonFor(x=>x.FeedbackPositive, "True", new { id = "feedback_positive"}) 
-        <label for="feedback_positive">Positive</label>
-        
-        @Html.RadioButtonFor(x=>x.FeedbackPositive, "False", new { id = "feedback_negative"})
-        <label for="feedback_negative">Negative</label>
-    </div>
-    <br/><br/>
+    <br/>
     <p>
         <label for="Type">Type of notification: </label>
         @Html.DropDownListFor(x => x.Type, new List<SelectListItem>
@@ -59,11 +59,6 @@
                 new SelectListItem
                     {
                         Selected = false,
-                        Text = "Other concern",
-                    },
-                new SelectListItem
-                    {
-                        Selected = false,
                         Text = "------------------------",
                     },
                 new SelectListItem
@@ -96,6 +91,11 @@
                         Text = "Disruptive",
                         Value = "{studentName} was disruptive in class."
                     },
+                 new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Other concern",
+                    },
                 
 
 
@@ -113,20 +113,21 @@
         <input id="Submit" type="submit" value="Send Message" />
     </p>
 }
-
+<div class="separator-line"></div>
 <h3>Historical Interactions</h3>
 <div class="messages">
     <ul>
-        <li>
-            <div class="interaction-date">12-12-2009 <i class="icon-calendar"></i></div>
-            <div class="interaction-message">
-                <p><h4>Positive feedback.</h4></p>
-                <p><span style="font-weight:bold;">Subject:</span> Some subject</p>
-                <p><span style="font-weight:bold;">Message:</span> Some long long message that we left on the student.</p>
-                
-            </div>
-            <div class="interaction-divider">.............................................................................................................................................................................................................</div>
-        </li>
+        @foreach(var m in Model.Notifications){
+            <li>
+                <div class="interaction-date">@m.DateTime.ToShortDateString() <i class="icon-calendar"></i></div>
+                <div class="interaction-message">
+                    <p><h4>@translateFeedback(m.FeedbackPositive) feedback.</h4></p>
+                    <p><span style="font-weight:bold;">Subject:</span> @m.Subject</p>
+                    <p><span style="font-weight:bold;">Message:</span> @m.Message</p>
+                </div>
+                <div class="interaction-divider">.............................................................................................................................................................................................................</div>
+            </li>
+            }
     </ul>
 </div>
 

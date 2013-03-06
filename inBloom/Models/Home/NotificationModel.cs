@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using inBloom.Controllers;
 
 namespace inBloom.Models.Home
 {
@@ -18,6 +19,10 @@ namespace inBloom.Models.Home
 
     public class NotificationViewModel : NotificationModel
     {
+        public NotificationViewModel()
+        {
+            Notifications = new List<NotificationModel>();
+        }
         public string StudentId { get; set; }
         public List<NotificationModel> Notifications { get; set; } 
     }

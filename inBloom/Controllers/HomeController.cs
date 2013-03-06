@@ -90,9 +90,15 @@ namespace inBloom.Controllers
         [HttpGet]
         public ActionResult NotifyParent()
         {
-            var model = new NotificationViewModel();
+            string studentId = Request.QueryString["StudentId"];
 
-            model.StudentId = Request.QueryString["StudentId"];
+            var studentCustomData = GetCustomStudentData(studentId);
+            
+            var model = new NotificationViewModel
+                {
+                    Notifications = studentCustomData.Notifications,
+                    StudentId = studentId,
+                };
 
             return View(model);
         }
@@ -101,15 +107,9 @@ namespace inBloom.Controllers
         public ActionResult NotifyParent(NotificationModel model)
         {
             model.DateTime = DateTime.Now;
+            model.FeedbackPositive = GetFeedback(model);
 
-            CustomStudentData customData;
-
-            var getResponse = _studentCustomService.GetCustomData<CustomStudentData>(RestClient, model.StudentId);
-            
-            if (getResponse.StatusCode == HttpStatusCode.NotFound)
-                customData = new CustomStudentData();
-            else            
-                customData = JsonConvert.DeserializeObject<CustomStudentData>(getResponse.Content);
+            var customData = GetCustomStudentData(model.StudentId);
 
             // Add the notification to the top of the list
             customData.Notifications.Insert(0, model);
@@ -119,6 +119,31 @@ namespace inBloom.Controllers
 
             TempData["message"] = "Notification sent.";
             return RedirectToAction("Index");
+        }
+
+        private bool GetFeedback(NotificationModel model)
+        {
+            if (model.Type.Contains("active participant")
+                || model.Type.Contains("performed well")
+                || model.Type.Contains("positive attitude") 
+                || model.Type.Contains("helped a classmate") 
+                || model.Type.Contains("turned in homework"))
+                return true;
+
+            return false;
+        }
+
+        private CustomStudentData GetCustomStudentData(string studentId)
+        {
+            CustomStudentData customData;
+
+            var getResponse = _studentCustomService.GetCustomData<CustomStudentData>(RestClient, studentId);
+
+            if (getResponse.StatusCode == HttpStatusCode.NotFound)
+                customData = new CustomStudentData();
+            else
+                customData = JsonConvert.DeserializeObject<CustomStudentData>(getResponse.Content);
+            return customData;
         }
 
         public class CustomStudentData

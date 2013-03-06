@@ -165,7 +165,8 @@ table {
 
 .interaction-message {
   float: left;
-  margin-left: 10px; }
+  margin-left: 10px;
+  width: 450px; }
 
 .interaction-divider {
   clear: both; }
