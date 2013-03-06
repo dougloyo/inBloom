@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace inBloom.Models.Home
 {
@@ -10,7 +7,12 @@ namespace inBloom.Models.Home
         public StudentListModel()
         {
             List = new List<Student>();
+            Sections = new List<Section>();
         }
+
+        public string SelectedSectionId { get; set; }
+
+        public List<Section> Sections { get; set; }
 
         public List<Student> List { get; set; }
 
@@ -23,6 +25,12 @@ namespace inBloom.Models.Home
             public string FullName {
                 get { return FirstName + " " + LastName; }
             }
+        }
+
+        public class Section
+        {
+            public string Id { get; set; }
+            public string SectionCode { get; set; }
         }
     }
 }

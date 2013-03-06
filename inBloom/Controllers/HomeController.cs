@@ -69,7 +69,36 @@ namespace inBloom.Controllers
 
         private StudentListModel GetStudentListModel()
         {
-            var studentsData = _studentService.GetStudents(AccessToken);
+            var sectionsData = _sectionService.GetSections(AccessToken, UserId);
+
+            var sections =
+                (from d in sectionsData
+                 orderby d.Value<string>("uniqueSectionCode")
+                 select new StudentListModel.Section
+                     {
+                         Id = d.Value<string>("id"),
+                         SectionCode = d.Value<string>("uniqueSectionCode"),
+                     })
+                     .ToList();
+
+            sections.Insert(0, new StudentListModel.Section { Id = "", SectionCode = "All" });
+
+            JArray studentsData;
+
+            string sectionId = Request.QueryString["sectionId"];
+
+            if (sectionId == null)
+            {
+                studentsData = _studentService.GetStudents(AccessToken);
+            }
+            else
+            {
+                //studentsData = _sectionService.GetSectionStudentAssociationStudentList(AccessToken, sectionId);
+                var request = new RestRequest(string.Format("/sections/{0}/studentSectionAssociations/students", sectionId), Method.GET);
+
+                var response = RestClient.Execute(request);
+                studentsData = JArray.Parse(response.Content);
+            }
 
             var students =
                 (from d in studentsData
@@ -82,8 +111,11 @@ namespace inBloom.Controllers
 
             var model = new StudentListModel
                 {
-                    List = students
+                    Sections = sections,
+                    List = students,
+                    SelectedSectionId = Request.QueryString["sectionId"],
                 };
+
             return model;
         }
 

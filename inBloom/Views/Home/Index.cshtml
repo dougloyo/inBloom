@@ -11,10 +11,15 @@
 }
 
 <p>
-    Section:
-    <select>
-        <option>Sec 145</option>
-    </select>
+    <label for="Sections">Section:</label>
+    @Html.DropDownListFor(x => x.Sections, 
+        from s in Model.Sections
+        select new SelectListItem()
+            {
+                Selected = s.Id == Model.SelectedSectionId, 
+                Text = s.SectionCode, 
+                Value = s.Id
+            })
 </p>
 <br/>
 <div style="width: 100%; text-align: right; padding-right: 20px; padding-bottom: 20px;">
@@ -102,3 +107,11 @@
     }
 </script>
 
+
+<script language="javascript">
+    $(document).ready(function() {
+        $("#Sections").change(function(e) {
+            window.location = "@Url.Action("Index")" + "?sectionId=" + $("#Sections").val();
+        });
+    });
+</script>
