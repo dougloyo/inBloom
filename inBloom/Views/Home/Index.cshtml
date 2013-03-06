@@ -18,7 +18,7 @@
 </p>
 <br/>
 <div style="width: 100%; text-align: right; padding-right: 20px; padding-bottom: 20px;">
-    <a href="#" title="Sends notification to the selected students.">Broadcast Notification</a>
+    <a href="javascript:goToBoradcast();" title="Sends notification to the selected students." >Broadcast Notification</a>
 </div>
 
 <div style="overflow:scroll; height: 600px; width: 100%">
@@ -85,5 +85,20 @@
                
             });
         });
+
+    function goToBoradcast() {
+        var url = "@Url.Action("BroadcastNotification")";
+        
+        var cbs = $('.studentCheckbox');
+        var studentIds = "?sids=";
+        
+        cbs.each(function() {
+            var cb = $(this);
+            studentIds = studentIds + cb.attr("data-studentId") + ",";
+        });
+
+        window.location = url + studentIds;
+
+    }
 </script>
 

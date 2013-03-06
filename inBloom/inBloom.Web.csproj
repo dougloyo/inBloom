@@ -130,6 +130,7 @@
       <DependentUpon>style.scss</DependentUpon>
     </Content>
     <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\students\StudentSprite.png" />
     <Content Include="Content\img\teachers\teacher1.png" />
     <Content Include="Content\img\teachers\teacher2.png" />
@@ -148,6 +149,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Home\ScheduleParentTeacherConference.cshtml" />
     <Content Include="Views\Parent\Index.cshtml" />
+    <Content Include="Views\Home\BroadcastNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

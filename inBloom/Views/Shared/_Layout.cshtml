@@ -9,8 +9,8 @@
         
         if(!string.IsNullOrEmpty(Request.QueryString["parent"]))
         {
-            Session["user_FullName"] = "Mrs. Locust";
-            return @Url.Content("~/Content/img/teachers/teacher1.png");
+            Session["user_FullName"] = "Mr. Herriman";
+            return @Url.Content("~/Content/img/teachers/teacher2.png");
         }
         
         if (Session["user_FullName"].ToString().Contains("Charles"))

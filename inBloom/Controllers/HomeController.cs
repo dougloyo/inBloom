@@ -174,5 +174,19 @@ namespace inBloom.Controllers
             return _sectionService.GetSections(AccessToken, UserId).ToString(Formatting.Indented);
         }
 
+        public ActionResult BroadcastNotification()
+        {
+            string studentId = Request.QueryString["StudentId"];
+
+            var studentCustomData = GetCustomStudentData(studentId);
+
+            var model = new NotificationViewModel
+            {
+                Notifications = studentCustomData.Notifications,
+                StudentId = studentId,
+            };
+
+            return View(model);
+        }
     }
 }

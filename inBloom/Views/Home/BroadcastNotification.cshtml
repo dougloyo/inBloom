@@ -1,6 +1,6 @@
 ﻿@model inBloom.Models.Home.NotificationViewModel
 @{
-    ViewBag.Title = "NotifyParent";
+    ViewBag.Title = "BroadcastNotification";
 }
 @functions
 {
@@ -16,7 +16,7 @@
     }
 
 }
-<h2><i class="icon-envelope"></i> Notify Parent</h2>
+<h2><i class="icon-envelope"></i> Broadcast Notification</h2>
 <div class="separator-line"></div>
 @using (Html.BeginForm("NotifyParent", "Home", FormMethod.Post, new {id = "form"}))
 {
@@ -118,23 +118,6 @@
         <input id="Submit" type="submit" value="Send Message" />
     </p>
 }
-<div class="separator-line"></div>
-<h3>Historical Interactions</h3>
-<div class="messages">
-    <ul>
-        @foreach(var m in Model.Notifications){
-            <li>
-                <div class="interaction-date">@m.DateTime.ToShortDateString() <i class="icon-calendar"></i></div>
-                <div class="interaction-message">
-                    <p><h4 @(colorCodeFeedback(m.FeedbackPositive))>@translateFeedback(m.FeedbackPositive) feedback.</h4></p>
-                    <p><span style="font-weight:bold;">Subject:</span> @m.Subject</p>
-                    <p><span style="font-weight:bold;">Message:</span> @m.Message</p>
-                </div>
-                <div class="interaction-divider">.............................................................................................................................................................................................................</div>
-            </li>
-            }
-    </ul>
-</div>
 
 <script type="text/javascript">
     $(document).ready(        
@@ -160,3 +143,4 @@
         return r;
     }
 </script>
+
