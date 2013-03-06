@@ -125,6 +125,7 @@
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\img\students\StudentSprite.png" />
     <Content Include="Content\img\teachers\teacher1.png" />
+    <Content Include="Content\img\teachers\teacher2.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

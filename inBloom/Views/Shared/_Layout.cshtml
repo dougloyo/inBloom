@@ -1,6 +1,23 @@
 ﻿@{
     ViewBag.Title = "_layout";
 }
+@functions
+{
+
+    public string GetTeacherImage()
+    {
+        if (Session["user_FullName"].ToString().Contains("Charles"))
+        {
+            return @Url.Content("~/Content/img/teachers/teacher2.png");
+        }
+        else
+        {
+            return @Url.Content("~/Content/img/teachers/teacher1.png");
+        }
+        
+    }
+
+}
 <!doctype html>
 <html lang="en">    
 <head>
@@ -16,9 +33,9 @@
 <div class="container">
     <div class="l-sidebar">
         <div class="padding">
-            <h2>Ms. Grey</h2>
+            <h2>@Session["user_FullName"].ToString()</h2>
             <div>
-                <img src="@Url.Content("~/Content/img/teachers/teacher1.png")" class="person-img"/>
+                <img src="@GetTeacherImage()" class="person-img"/>
                 <ul>
                     <li><a href="#"><i class="icon-user"></i> About me</a></li>
                     <li><a href="#"><i class="icon-file-alt"></i> Resume</a></li>
