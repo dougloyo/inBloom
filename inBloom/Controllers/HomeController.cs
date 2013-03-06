@@ -94,6 +94,18 @@ namespace inBloom.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult ScheduleParentTeacherConference()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ScheduleParentTeacherConference(object model)
+        {
+            return View(model);
+        }
+
         private string GetSections()
         {
             // System.Web.HttpContext.Current.Response.Redirect(" mypage.aspx");

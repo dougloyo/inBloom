@@ -30,7 +30,7 @@ div.container {
   display: block;
   width: 200px; }
 #form input[type=submit] {
-  width: 100px;
+  width: 150px;
   height: 30px; }
 #form .radios label {
   float: left;

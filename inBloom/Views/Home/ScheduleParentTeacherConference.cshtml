@@ -1,0 +1,12 @@
+﻿@model inBloom.Models.Home.ScheduleParentTeacherConferenceModel
+@{
+    ViewBag.Title = "ScheduleParentTeacherConference";
+}
+
+<h2><i class="icon-calendar"></i> Schedule Parent Teacher Conference</h2>
+@using (Html.BeginForm("ScheduleParentTeacherConference", "Home", FormMethod.Post, new { id = "form" }))
+{
+    <p>
+        <input id="Submit" type="submit" value="Schedule Appointment" />
+    </p>
+}
