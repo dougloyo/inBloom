@@ -6,6 +6,13 @@
 
     public string GetTeacherImage()
     {
+        
+        if(!string.IsNullOrEmpty(Request.QueryString["parent"]))
+        {
+            Session["user_FullName"] = "Mrs. Locust";
+            return @Url.Content("~/Content/img/teachers/teacher1.png");
+        }
+        
         if (Session["user_FullName"].ToString().Contains("Charles"))
         {
             return @Url.Content("~/Content/img/teachers/teacher2.png");
@@ -52,7 +59,7 @@
                     <li><a href="@Url.Action("Index","Home")">Sections</a></li>
                     <li><a href="@Url.Action("ScheduleParentTeacherConference", "Home")">Schedule Teacher Parent Conference</a></li>
                     <li><a href="#">Something 1</a></li>
-                    <li><a href="#">Something 2</a></li>
+                    <li><a href="@Url.Action("Index", "Parent")">Parent Portal</a></li>
                     <li><a href="#">Something 3</a></li>
                 </ul>
             </div>
