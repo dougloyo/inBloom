@@ -7,8 +7,9 @@
 <div class="separator-line"></div>
 @if (TempData.ContainsKey("message"))
 {
-    <div class="message">@TempData["message"]</div>
+    <div class="message">@TempData["message"]</div>    
 }
+
 <p>
     Section:
     <select>
@@ -16,32 +17,73 @@
     </select>
 </p>
 <br/>
-<div style="overflow:scroll; height: 600px; width: 100%">
-<table style="margin:auto;">
-    <thead>
-        <tr>
-            <th></th>
-            <th></th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    @{
-        var i = 0;
-    }
-    @foreach (var s in Model.List)
-    {
-        <tr>
-            <td><input type="checkbox"/>&nbsp;</td>
-            <td><i class="student-@(i%4)"></i></td>
-            <td>@s.FirstName</td>
-            <td>@s.LastName</td>
-            <td><a href="@Url.Action("NotifyParent", new { studentName = s.FirstName, studentId = s.Id})">Notify Parent</a></td>
-        </tr>
-        i++;
-    }
-    
-</table>
+<div style="width: 100%; text-align: right; padding-right: 20px; padding-bottom: 20px;">
+    <a href="#" title="Sends notification to the selected students.">Broadcast Notification</a>
 </div>
+
+<div style="overflow:scroll; height: 600px; width: 100%">
+    <table style="margin:auto;">
+        <thead>
+            <tr>
+                <th style="width: 20px;"><input type="checkbox" class="allCheckbox" title="Select all students."/></th>
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        @{
+            var i = 0;
+        }
+        @foreach (var s in Model.List)
+        {
+            <tr class="row@(i)">
+                <td><input class="studentCheckbox" type="checkbox" data-studentId="@s.Id" data-row="row@(i)"/>&nbsp;</td>
+                <td><i class="student-@(i%4)"></i></td>
+                <td>@s.FirstName</td>
+                <td>@s.LastName</td>
+                <td><a href="@Url.Action("NotifyParent", new { studentName = s.FirstName, studentId = s.Id})">Notify Parent</a></td>
+            </tr>
+            i++;
+        }
+    
+    </table>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(
+        function() {
+            $('.studentCheckbox').click(
+                function () {
+                    var checkbox = $(this);
+                    var rowClass = checkbox.attr("data-row");
+                    
+                    if (checkbox.is(':checked')) {
+                        $('.' + rowClass).addClass('highlight');
+                    } else {
+                        $('.' + rowClass).removeClass('highlight');
+                    }
+                });
+
+            $('.allCheckbox').click(function() {
+                var allCb = $(this);
+                var cbs = $('.studentCheckbox');
+
+                if (allCb.is(':checked')) {
+                    cbs.each(function() {
+                        $(this).prop('checked', true);
+                        var rowClass = $(this).attr("data-row");
+                        $('.' + rowClass).addClass('highlight');
+                    });
+                } else {
+                    cbs.each(function (item) {
+                        $(this).prop('checked', false);
+                        var rowClass = $(this).attr("data-row");
+                        $('.' + rowClass).removeClass('highlight');
+                    });
+                }
+               
+            });
+        });
+</script>
 

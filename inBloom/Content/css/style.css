@@ -63,8 +63,8 @@ body {
 
 a {
   font-size: 14px;
-  color: #77c69f;
-  text-decoration: none; }
+  color: #3996d2;
+  text-decoration: underline; }
 
 label {
   font-weight: bold; }
@@ -81,10 +81,12 @@ input[type=radio] {
   background-color: #0c0d0c;
   color: white; }
   .l-sidebar a {
-    color: #77c69f;
+    color: #3996d2;
     font-size: 14px; }
   .l-sidebar h1, .l-sidebar h2, .l-sidebar h3, .l-sidebar h4, .l-sidebar h5 {
     color: white; }
+  .l-sidebar h2 {
+    font-size: 22px; }
   .l-sidebar ul {
     list-style-type: none; }
     .l-sidebar ul li {
@@ -95,13 +97,13 @@ input[type=radio] {
 
 .person-img {
   float: left;
-  border: 3px solid #77c69f;
+  border: 3px solid #3996d2;
   width: 70px;
   height: 70px;
   margin-right: 10px; }
 
 .l-divider {
-  background-color: #77c69f;
+  background-color: #3996d2;
   padding: 10px; }
 
 .l-nav li a {
@@ -109,14 +111,14 @@ input[type=radio] {
   color: white;
   text-decoration: none; }
 .l-nav li a:hover, .l-nav li .active {
-  color: #77c69f;
+  color: #3996d2;
   text-decoration: underline; }
 
 table {
   width: 500px;
   border-collapse: collapse; }
   table thead tr {
-    background-color: #77c69f;
+    background-color: #3996d2;
     color: white;
     font-weight: bold; }
     table thead tr th {
@@ -124,6 +126,8 @@ table {
       text-align: left; }
   table tr {
     margin-bottom: 10px; }
+  table tr.highlight {
+    background-color: #d7d7d7; }
 
 .student-0, .student-1, .student-2, .student-3 {
   display: block;
@@ -170,4 +174,12 @@ table {
 
 .interaction-divider {
   clear: both; }
+
+.message {
+  background-color: #3996d2;
+  color: white;
+  width: 95%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px; }
 
