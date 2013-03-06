@@ -1,0 +1,45 @@
+// 1. Resets
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+}
+
+div.container{
+	width: 960px;
+	margin: auto;
+	overflow: hidden;
+	box-shadow: 0px 0 20px #ccc, -6px 0 20px #ccc;
+}
+
+.l-sidebar{
+	width: 225px;	
+	height: 800px;
+	float: left;	
+	
+	//-webkit-box-shadow: 10px 4px 70px #e6e6e6;
+    //-moz-box-shadow: 10px 4px 70px #e6e6e6;    
+}
+
+.padding{
+	padding: 20px;
+}
+
+.l-main-container{
+	float: left;
+	margin-left: 2px;
+	width: 690px;
+	height: 760px;
+	padding: 20px;
+}
+
+.l-divider{
+	
+}
+
+.l-menu{
+}

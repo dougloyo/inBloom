@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "_layout";
+}
+<!doctype html>
+<html lang="en">    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='@Url.Content("~/Content/css/style.css")' rel='stylesheet' type='text/css'>
+    <link href='@Url.Content("~/Content/css/font-awesome.min.css")' rel='stylesheet' type='text/css'>
+    @RenderSection("head", required: false)
+</head>
+<body>
+<div class="container">
+    <div class="l-sidebar">
+        <div class="padding">
+            <h2>Ms. Grey</h2>
+            <div>
+                <img src="@Url.Content("~/Content/img/teachers/teacher1.png")" class="person-img"/>
+                <ul>
+                    <li><a href="#"><i class="icon-user"></i> About me</a></li>
+                    <li><a href="#"><i class="icon-file-alt"></i> Resume</a></li>
+                    <li><a href="#"><i class="icon-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="l-divider">
+            <h2>Communicator</h2>
+        </div>
+        <div class="padding">
+            <ul class="l-nav">
+                <li><a href="@Url.Action("Index","Home")">Sections</a></li>
+                <li><a href="#">Schedule Teacher Parent Conference</a></li>
+                <li><a href="#">Something</a></li>
+                <li><a href="#">Something</a></li>
+                <li><a href="#">Something</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="l-main-container">
+        @RenderBody()
+    </div>
+</div>
+    </body>
+</html>

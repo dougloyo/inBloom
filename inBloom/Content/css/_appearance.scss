@@ -1,0 +1,128 @@
+//Colors
+$background-primary: #ebf3ef; //Very Light background green.
+$background-secondary: #fff; //White
+$background-tertiary: #0c0d0c; //Dark charcoal color
+$background-forth: #77c69f; //Light green
+
+$font-color-primary: #575655; //Dark Grey
+$font-color-secondary: #77c69f; //Light green
+$font-color-tertiary: #fff; //White
+
+body
+{
+	background-color: $background-primary;
+	color: $font-color-primary;
+}
+
+input, textarea, select{
+	border: 1px solid $font-color-primary;
+}
+
+.l-sidebar{
+
+	background-color: $background-tertiary;
+
+	color: $font-color-tertiary;
+
+	a{
+		color:$font-color-secondary;
+		font-size: 14px;
+	}
+
+	h1,h2,h3,h4,h5{
+		color: $font-color-tertiary;
+	}
+
+	ul{
+		list-style-type: none;
+
+		li{
+			margin-top: 8px;
+		}
+	}
+}
+
+.l-main-container{
+	background-color: $background-secondary;
+}
+
+.person-img{
+	float: left;
+	border: 3px solid $background-forth;
+	width: 70px;
+	height: 70px;
+	margin-right: 10px;
+}
+
+.l-divider{
+	background-color: $background-forth;
+	padding: 10px;
+}
+
+.l-nav
+{
+
+	li{
+		a{
+			font-size: 14px;
+			color: $font-color-tertiary;
+			text-decoration: none;
+		}
+
+		a:hover, .active{
+			color: $font-color-secondary;
+			text-decoration: underline;
+		}
+	}
+
+
+}
+
+table{
+	width: 500px;
+	border-collapse: collapse;
+	thead{
+		tr{
+			background-color: $font-color-secondary;
+			color:$font-color-tertiary;
+			font-weight: bold;
+
+			th{
+				padding: 5px;
+				text-align: left;
+			}
+		}
+	}
+
+	tr{
+		margin-bottom: 10px;
+	}
+}
+
+.student-0, .student-1, .student-2, .student-3 {
+	display: block;
+	width:94px;
+	height:94px;
+	background-image: url("../img/students/StudentSprite.png");
+	background-repeat: none;
+}
+
+.student-0{
+	background-position: 0px 0px;
+}
+
+.student-1{
+background-position: 0px 95px;
+} 
+
+.student-2{
+background-position: 0px 191px;
+} 
+
+.student-3 {
+background-position: 0px 287px;
+}
+
+.student-4 {
+background-position: 0px 382px;
+}

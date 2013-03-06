@@ -1,0 +1,64 @@
+﻿@model inBloom.Models.Home.NotificationModel
+@{
+    ViewBag.Title = "NotifyParent";
+}
+
+<h2><i class="icon-envelope"></i> Notify Parent</h2>
+<br/>
+@using (Html.BeginForm("NotifyParent", "Home", FormMethod.Post, new {id = "searchForm"}))
+{
+    <p>
+        <label>Type of notification</label>
+        @Html.DropDownListFor(x => x.Type, new List<SelectListItem>
+            {
+                new SelectListItem
+                    {
+                        Selected = true,
+                        Text = "-Select-",
+                    },
+                new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Homework not turned in",
+                    },
+                new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Homework incomplete",
+                    },
+                new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Absent",
+                    },
+                new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Tardy",
+                    },
+                new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Disruptive",
+                    },
+                new SelectListItem
+                    {
+                        Selected = false,
+                        Text = "Other concern",
+                    },
+
+
+            })
+    </p>
+    <p>
+        <label>Title:</label>
+        @Html.TextBoxFor(x => x.Title)
+    </p>
+    <p>
+        <label>Message:</label><br/>
+        @Html.TextAreaFor(x => x.Message)
+    </p>
+    <p>
+        <input id="Submit" type="submit" value="Send Message" />
+    </p>
+}
